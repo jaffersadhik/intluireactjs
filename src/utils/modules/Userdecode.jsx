@@ -6,7 +6,6 @@ export const Userdecode =()=> {
     
     const token = authstate?.accessToken
     const user = jwtDecode(token); // Use jwt_decode.default to access the function
-    console.log(user.sub)
 
 
   return user.sub

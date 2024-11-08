@@ -48,13 +48,7 @@ function CostSmscList() {  // Change here
         }
     };
 
-    const decodePassword = (encodedPassword) => {
-        try {
-            return atob(encodedPassword);  // atob decodes a Base64-encoded string
-        } catch (error) {
-            return "Invalid Password";  // Return an error message if decoding fails
-        }
-    };
+
 
     return (
         <div className='w-[100%] h-auto min-h-screen admin-inner-body1 pb-10'>

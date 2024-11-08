@@ -23,10 +23,10 @@ export const authSlice = createSlice({
     initialState: INITIAL_STATE,
     reducers: {
         setCredentials: (state, action) => {
-            const { accessToken } = action.payload
-            //   state.username = username
+            const { accessToken,username,refreshToken } = action.payload
+            state.username = username
             state.accessToken = accessToken
-            //   state.refreshToken = refreshToken
+            state.refreshToken = refreshToken
             //   state.roles = roles
             //   state.user_id = user_id
         },

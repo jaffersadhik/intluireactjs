@@ -20,7 +20,7 @@ function KannelHostList() {
     const [count, setcount] = useState("");
 
     const TABLE_HEADERS = [
-        { label: "Action", key: "kannelhostname" },
+        // { label: "Action", key: "kannelhostname" },
         { label: "kannelhostname", key: "kannelhostname" },
 
         { label: "dcname", key: "dcname" },
@@ -112,10 +112,8 @@ function KannelHostList() {
                                         data.map((item) => (
                                             <tr key={item.customer_id} className="admin-inner-body2 border-b border-[#6b72808b]">
 
-                                                <td className="px-6 py-4 gap-2 flex">
-                                                    {/* <button onClick={() => navigate('/vendor/smscview', { state: { smsc: item } })} className="px-4 py-2 text-xs font-bold uppercase rounded-full shadow-sm text-indigo-800 bg-indigo-100 hover:bg-indigo-200">
-                                                        View
-                                                    </button> */}
+                                                {/* <td className="px-6 py-4 gap-2 flex">
+                                            
 
                                                     <button onClick={() => navigate('/vendor/kannelhostedit', { state: { KannelHost: item } })}
 
@@ -123,7 +121,7 @@ function KannelHostList() {
                                                     >
                                                         Edit
                                                     </button>
-                                                </td>
+                                                </td> */}
                                                 
                                                 <td className="px-6 py-4">{item.kannelhostname}</td> 
 

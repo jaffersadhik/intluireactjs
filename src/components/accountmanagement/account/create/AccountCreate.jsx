@@ -53,7 +53,9 @@ function AccountCreate() {
     smstype: '',
     status: '',
     timezone_id: '',
-    errorcode_type: ''
+    errorcode_type: '',
+    cluster: '',
+
   });
 
 
@@ -445,10 +447,11 @@ function AccountCreate() {
                       <option value="" disabled defaultValue>
                         IP Check
                       </option>
-                      <option value="ACCOUNTS">ACCOUNTS</option>
-                      <option value="CUSTOMER">CUSTOMER</option>
-                      <option value="SHARED">SHARED</option>
-                      <option value="DISABLED">DISABLED</option>
+                      <option value="accounts">ACCOUNTS</option>
+                      <option value="customer">CUSTOMER</option>
+                      <option value="shared">SHARED</option>
+                      <option value="disabled">DISABLED</option>
+
                     </select>
 
                     {/* Down Arrow */}
@@ -462,161 +465,166 @@ function AccountCreate() {
 
 
                 <div className="md:w-1/2 px-3">
-  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="mncmcccheck">
-    MNC MCC Check
-  </label>
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="mncmcccheck">
+                    MNC MCC Check
+                  </label>
 
-  <div className="relative">
-    <select
-      id="mncmcccheck"
-      name="mncmcccheck"
-      value={formData.mncmcccheck}
-      onChange={handleChange}
-      className="appearance-none block w-full bg-grey-lighter text-table-text border border-red rounded py-2 px-2 mb-3 pr-8"
-    >
-      <option value="" disabled defaultValue>
-        MNC MCC Check
-      </option>
-      <option value="ENABLED">ENABLED</option>
-      <option value="DISABLED">DISABLED</option>
-    </select>
+                  <div className="relative">
+                    <select
+                      id="mncmcccheck"
+                      name="mncmcccheck"
+                      value={formData.mncmcccheck}
+                      onChange={handleChange}
+                      className="appearance-none block w-full bg-grey-lighter text-table-text border border-red rounded py-2 px-2 mb-3 pr-8"
+                    >
+                      <option value="" disabled defaultValue>
+                        MNC MCC Check
+                      </option>
+                      <option value="enabled">ENABLED</option>
+                      <option value="disabled">DISABLED</option>
 
-    {/* Down Arrow */}
-    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
-      </svg>
-    </div>
-  </div>
-</div>
+                    </select>
+
+                    {/* Down Arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
               </div>
 
               {/* Price Check & Protocol */}
               <div className="-mx-3 md:flex mb-6">
-              <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="pricecheck">
-    Price Check
-  </label>
+                <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="pricecheck">
+                    Price Check
+                  </label>
 
-  <div className="relative">
-    <select
-      id="pricecheck"
-      name="pricecheck"
-      value={formData.pricecheck}
-      onChange={handleChange}
-      className="appearance-none block w-full bg-grey-lighter text-table-text border border-red rounded py-2 px-2 mb-3 pr-8"
-    >
-      <option value="" disabled defaultValue>
-        Price Check
-      </option>
-      <option value="ACCOUNTS">ACCOUNTS</option>
-      <option value="CUSTOMER">CUSTOMER</option>
-      <option value="SHARED">SHARED</option>
-    </select>
+                  <div className="relative">
+                    <select
+                      id="pricecheck"
+                      name="pricecheck"
+                      value={formData.pricecheck}
+                      onChange={handleChange}
+                      className="appearance-none block w-full bg-grey-lighter text-table-text border border-red rounded py-2 px-2 mb-3 pr-8"
+                    >
+                      <option value="" disabled defaultValue>
+                        Price Check
+                      </option>
+                      <option value="accounts">ACCOUNTS</option>
+                      <option value="customer">CUSTOMER</option>
+                      <option value="shared">SHARED</option>
 
-    {/* Down Arrow */}
-    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
-      </svg>
-    </div>
-  </div>
-</div>
+                    </select>
 
-<div className="md:w-1/2 px-3">
-  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="protocol">
-    Protocol
-  </label>
+                    {/* Down Arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
-  <div className="relative">
-    <select
-      name="protocol"
-      value={formData.protocol}
-      onChange={handleChange}
-      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
-      id="protocol"
-    >
-      <option value="" disabled defaultValue>
-        Protocol
-      </option>
-      <option value="HTTP">HTTP</option>
-      <option value="SMPP">SMPP</option>
-      <option value="GUI">GUI</option>
-    </select>
+                <div className="md:w-1/2 px-3">
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="protocol">
+                    Protocol
+                  </label>
 
-    {/* Down Arrow */}
-    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
-      </svg>
-    </div>
-  </div>
-</div>
+                  <div className="relative">
+                    <select
+                      name="protocol"
+                      value={formData.protocol}
+                      onChange={handleChange}
+                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
+                      id="protocol"
+                    >
+                      <option value="" disabled defaultValue>
+                        Protocol
+                      </option>
+                      <option value="http">HTTP</option>
+                      <option value="smpp">SMPP</option>
+                      <option value="gui">GUI</option>
+
+                    </select>
+
+                    {/* Down Arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
               </div>
 
               {/* Route Check & Route Type */}
               <div className="-mx-3 md:flex mb-6">
-              <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="routecheck">
-    Route Check
-  </label>
+                <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="routecheck">
+                    Route Check
+                  </label>
 
-  <div className="relative">
-    <select
-      name="routecheck"
-      value={formData.routecheck}
-      onChange={handleChange}
-      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
-      id="routecheck"
-    >
-      <option value="" disabled defaultValue>
-        Route Check
-      </option>
-      <option value="ACCOUNT-CUSTOMER-SHARED">ACCOUNT-CUSTOMER-SHARED</option>
-      <option value="CUSTOMER-SHARED">CUSTOMER-SHARED</option>
-      <option value="SHARED">SHARED</option>
-      <option value="LCR">LCR</option>
-    </select>
+                  <div className="relative">
+                    <select
+                      name="routecheck"
+                      value={formData.routecheck}
+                      onChange={handleChange}
+                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
+                      id="routecheck"
+                    >
+                      <option value="" disabled defaultValue>
+                        Route Check
+                      </option>
+                      <option value="account-customer-shared">ACCOUNT-CUSTOMER-SHARED</option>
+                      <option value="customer-shared">CUSTOMER-SHARED</option>
+                      <option value="shared">SHARED</option>
+                      <option value="lcr">LCR</option>
 
-    {/* Down Arrow */}
-    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
-      </svg>
-    </div>
-  </div>
-</div>
+                    </select>
 
-<div className="md:w-1/2 px-3">
-  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="routetype">
-    Route Type
-  </label>
+                    {/* Down Arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
-  <div className="relative">
-    <select
-      name="routetype"
-      value={formData.routetype}
-      onChange={handleChange}
-      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
-      id="routetype"
-    >
-      <option value="" disabled defaultValue>
-        Route Type
-      </option>
-      <option value="DOMESTIC">DOMESTIC</option>
-      <option value="INTERNATIONAL">INTERNATIONAL</option>
-    </select>
+                <div className="md:w-1/2 px-3">
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="routetype">
+                    Route Type
+                  </label>
 
-    {/* Down Arrow */}
-    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
-      </svg>
-    </div>
-  </div>
-</div>
+                  <div className="relative">
+                    <select
+                      name="routetype"
+                      value={formData.routetype}
+                      onChange={handleChange}
+                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
+                      id="routetype"
+                    >
+                      <option value="" disabled defaultValue>
+                        Route Type
+                      </option>
+                      <option value="domestic">DOMESTIC</option>
+                      <option value="international">INTERNATIONAL</option>
+
+                    </select>
+
+                    {/* Down Arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
               </div>
 
@@ -637,10 +645,11 @@ function AccountCreate() {
                       <option value="" disabled defaultValue>
                         Sender ID Check
                       </option>
-                      <option value="ACCOUNTS">ACCOUNTS</option>
-                      <option value="CUSTOMER">CUSTOMER</option>
-                      <option value="SHARED">SHARED</option>
-                      <option value="DISABLED">DISABLED</option>
+                      <option value="accounts">ACCOUNTS</option>
+                      <option value="customer">CUSTOMER</option>
+                      <option value="shared">SHARED</option>
+                      <option value="disabled">DISABLED</option>
+
                     </select>
                     {/* Down Arrow */}
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -665,10 +674,11 @@ function AccountCreate() {
                       <option value="" disabled defaultValue>
                         SMS Type
                       </option>
-                      <option value="OTP">OTP</option>
-                      <option value="TRANSACTIONAL">TRANSACTIONAL</option>
-                      <option value="PROMOTIONAL">PROMOTIONAL</option>
-                      <option value="ALERT">ALERT</option>
+                      <option value="otp">OTP</option>
+                      <option value="transactional">TRANSACTIONAL</option>
+                      <option value="promotional">PROMOTIONAL</option>
+                      <option value="alert">ALERT</option>
+
                     </select>
                     {/* Down Arrow */}
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -683,65 +693,66 @@ function AccountCreate() {
 
               {/* Status & Timezone ID */}
               <div className="-mx-3 md:flex mb-6">
-              <div className="md:w-1/2 px-3 mb-6 md:mb-0">
-  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="status">
-    Status
-  </label>
-  <div className="relative">
-    <select
-      id="status"
-      name="status"
-      value={formData.status}
-      onChange={handleChange}
-      className="appearance-none block w-full bg-grey-lighter text-table-text border border-red rounded py-2 px-2 mb-3 pr-8"
-    >
-      <option value="" disabled defaultValue>
-        Status
-      </option>
-      <option value="ACTIVE">ACTIVE</option>
-      <option value="INACTIVE">INACTIVE</option>
-    </select>
+                <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="status">
+                    Status
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="status"
+                      name="status"
+                      value={formData.status}
+                      onChange={handleChange}
+                      className="appearance-none block w-full bg-grey-lighter text-table-text border border-red rounded py-2 px-2 mb-3 pr-8"
+                    >
+                      <option value="" disabled defaultValue>
+                        Status
+                      </option>
+                      <option value="active">ACTIVE</option>
+                      <option value="inactive">INACTIVE</option>
 
-    {/* Down Arrow */}
-    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
-      </svg>
-    </div>
-  </div>
-</div>
+                    </select>
 
-<div className="md:w-1/2 px-3">
-  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="timezone_id">
-    Timezone ID
-  </label>
-  <div className="relative">
-    <select
-      id="timezone_id"
-      name="timezone_id"
-      value={formData.timezone_id}
-      onChange={handleChange}
-      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
-    >
-      <option value="" disabled defaultValue>
-        Timezone ID
-      </option>
-      {Worldtimezone &&
-        Worldtimezone.map((timezone) => (
-          <option key={timezone.timezone_id} value={timezone.timezone_id}>
-            {timezone.longname}
-          </option>
-        ))}
-    </select>
+                    {/* Down Arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
-    {/* Down Arrow */}
-    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
-      </svg>
-    </div>
-  </div>
-</div>
+                <div className="md:w-1/2 px-3">
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="timezone_id">
+                    Timezone ID
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="timezone_id"
+                      name="timezone_id"
+                      value={formData.timezone_id}
+                      onChange={handleChange}
+                      className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
+                    >
+                      <option value="" disabled defaultValue>
+                        Timezone ID
+                      </option>
+                      {Worldtimezone &&
+                        Worldtimezone.map((timezone) => (
+                          <option key={timezone.timezone_id} value={timezone.timezone_id}>
+                            {timezone.longname}
+                          </option>
+                        ))}
+                    </select>
+
+                    {/* Down Arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
               </div>
 
@@ -780,6 +791,35 @@ function AccountCreate() {
                   </div>
                 </div>
 
+
+                <div className="md:w-1/2 px-3">
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="smstype">
+                    CLUSTER
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="cluster"
+                      name="cluster"
+                      value={formData.cluster}
+                      onChange={handleChange}
+                      className="appearance-none block w-full bg-grey-lighter text-table-text border border-red rounded py-2 px-2 mb-3 pr-8"
+                    >
+                      <option value="" disabled defaultValue>
+                        CLUSTER
+                      </option>
+                      <option value="otp">OTP</option>
+                      <option value="trans">TRANS</option>
+                      <option value="bulk">BULK</option>
+
+                    </select>
+                    {/* Down Arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
               </div>
 

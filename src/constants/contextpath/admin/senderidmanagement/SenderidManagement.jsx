@@ -1,16 +1,16 @@
 // apiEndpoints.js
 
 // SenderIdAccount API Endpoints
-export const senderIdAccountGetAll = 'senderidaccount/getall/';
-export const senderIdAccountCreate = 'senderidaccount/save/';
-export const senderIdAccountUpdate = 'senderidaccount/edit/';
+export const senderIdAccountGetAll = 'remotesenderid/senderidaccount/getall/';
+export const senderIdAccountCreate = 'remotesenderid/senderidaccount/save/';
+export const senderIdAccountUpdate = 'remotesenderid/senderidaccount/edit/';
 
 // SenderIdCustomer API Endpoints
-export const senderIdCustomerGetAll = 'senderidcustomer/getall/';
-export const senderIdCustomerCreate = 'senderidcustomer/save/';
-export const senderIdCustomerUpdate = 'senderidcustomer/edit/';
+export const senderIdCustomerGetAll = 'remotesenderid/senderidcustomer/getall/';
+export const senderIdCustomerCreate = 'remotesenderid/senderidcustomer/save/';
+export const senderIdCustomerUpdate = 'remotesenderid/senderidcustomer/edit/';
 
 // SenderIdShared API Endpoints
-export const senderIdSharedGetAll = 'senderidshared/getall/';
-export const senderIdSharedCreate = 'senderidshared/save/';
-export const senderIdSharedUpdate = 'senderidshared/edit/';
+export const senderIdSharedGetAll = 'remotesenderid/senderidshared/getall/';
+export const senderIdSharedCreate = 'remotesenderid/senderidshared/save/';
+export const senderIdSharedUpdate = 'remotesenderid/senderidshared/edit/';

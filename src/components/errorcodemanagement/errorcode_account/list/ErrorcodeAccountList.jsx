@@ -23,7 +23,6 @@ function ErrorcodeAccountList() {  // Updated component name
         { label: "Action", key: "price_id" },
         { label: "accountname ", key: "accountname" },
         { label: "status", key: "status" },
-
         { label: "Created Date", key: "created_date" },
     ];
 

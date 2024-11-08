@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import logomain from '../../../../assets/images/navbar/usernavbar/logomain.png'
 // import proimage from '../../../../assets/images/navbar/usernavbar/proimage.png'
 // import { IoIosArrowDown } from "react-icons/io";
-import { Userdecode } from '../../../../utils/modules/Userdecode';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { userlogout } from "../../../../store/AuthSlice";
@@ -14,6 +13,7 @@ function Navbar() {
     const color  = useSelector((state) => state.Auth.colourapi)
     const pagename = useSelector((state)=> state.Auth.pagename)
     console.log(pagename,"pagename_cua page")
+    const authstate = useSelector((state)=> state.Auth)
 
 
     const sidebartype = useSelector((state) => state.Auth.sidebarType)
@@ -25,7 +25,6 @@ function Navbar() {
     // const [togilaccount, settogilaccount] = useState(true);
 
 
-    const userSub = Userdecode();
     const handleLogout = (e) => {
         e.preventDefault();
         localStorage.clear();
@@ -96,7 +95,8 @@ function Navbar() {
                                         </div>
 
                                         <div className='flex justify-center items-center mb-2'>
-                                            <span>Hi, </span>  {userSub && <h6>{userSub}!</h6>}
+                                            <span>Hi, </span> 
+                                            <span>{authstate.username}</span>
 
                                         </div>
 
@@ -180,7 +180,7 @@ function Navbar() {
                                 <div className='flex justify-center items-center w-[46px] cursor-pointer ' onClick={() => setTogiletwo(!togiletwo)}
                                 >
                                     <div className='w-10 h-10 flex justify-center items-center rounded-full  bg-opacity-10 border-4 border-white' style={{ backgroundColor: color }}>
-                                        <p>A</p>
+                                    <p>{authstate.username ? authstate.username.charAt(0).toUpperCase() : null}</p>
                                     </div>
                                 </div>
 
@@ -198,12 +198,12 @@ function Navbar() {
 
                                         <div className='flex items-center justify-center  mt-4'>
                                             <div className='w-16 h-16 mb-4 flex justify-center items-center rounded-full text-white font-bold  border-8 border-indigo-200' style={{ backgroundColor: color }} >
-                                                <p>A</p>
+                                            <p>{authstate.username ? authstate.username.charAt(0).toUpperCase() : null}</p>
                                             </div>
                                         </div>
 
                                         <div className='flex justify-center items-center mb-2'>
-                                            <span>Hi, </span>  {userSub && <h6>{userSub}!</h6>}
+                                        <span>Hi, </span><b>{authstate.username}</b>
 
                                         </div>
 

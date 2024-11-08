@@ -57,6 +57,7 @@ function AccountEdit() {
     status: account?.status || '',
     timezone_id: account?.timezone_id || '',
     errorcode_type: account?.errorcode_type || '',
+    cluster:account?.cluster || '',
 
     
   });
@@ -700,7 +701,34 @@ function AccountEdit() {
                     </div>
                   </div>
                 </div>
+                <div className="md:w-1/2 px-3">
+                  <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="smstype">
+                    CLUSTER
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="cluster"
+                      name="cluster"
+                      value={formData.cluster}
+                      onChange={handleChange}
+                      className="appearance-none block w-full bg-grey-lighter text-table-text border border-red rounded py-2 px-2 mb-3 pr-8"
+                    >
+                      <option value="" disabled defaultValue>
+                        CLUSTER
+                      </option>
+                      <option value="otp">OTP</option>
+                      <option value="trans">TRANS</option>
+                      <option value="bulk">BULK</option>
 
+                    </select>
+                    {/* Down Arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M5.29289 7.29289a1 1 0 011.41421 0L10 10.5858l3.2929-3.2929a1 1 0 111.4142 1.4142l-4 4a1 1 0 01-1.4142 0l-4-4a1 1 0 010-1.4142z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
               </div>
 
@@ -708,7 +736,7 @@ function AccountEdit() {
               {/* test end */}
 
               <div className="flex items-center justify-between">
-                <Button>Create Account</Button>
+                <Button>Save chanages Account</Button>
               </div>
             </form>
           </main>

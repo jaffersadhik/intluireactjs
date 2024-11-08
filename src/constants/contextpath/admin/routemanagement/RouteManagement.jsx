@@ -1,28 +1,28 @@
 // Define API endpoints as constants
-export const routeGetAll = 'route/getall';
-export const routeSave = 'route/save';
-export const routeEdit = 'route/edit';
+export const routeGetAll = 'remoterouting/route/getall';
+export const routeSave = 'remoterouting/route/save';
+export const routeEdit = 'remoterouting/route/edit';
 
-export const routeAccountGetAll = 'routeaccount/getall';
-export const routeAccountSave = 'routeaccount/save';
-export const routeAccountEdit = 'routeaccount/edit';
+export const routeAccountGetAll = 'remoterouting/routeaccount/getall';
+export const routeAccountSave = 'remoterouting/routeaccount/save';
+export const routeAccountEdit = 'remoterouting/routeaccount/edit';
 
-export const routeAccountMncmccGetAll = 'routeaccountmncmcc/getall';
-export const routeAccountMncmccSave = 'routeaccountmncmcc/save';
-export const routeAccountMncmccEdit = 'routeaccountmncmcc/edit';
+export const routeAccountMncmccGetAll = 'remoterouting/routeaccountmncmcc/getall';
+export const routeAccountMncmccSave = 'remoterouting/routeaccountmncmcc/save';
+export const routeAccountMncmccEdit = 'remoterouting/routeaccountmncmcc/edit';
 
-export const routeCustomerGetAll = 'routecustomer/getall';
-export const routeCustomerSave = 'routecustomer/save';
-export const routeCustomerEdit = 'routecustomer/edit';
+export const routeCustomerGetAll = 'remoterouting/routecustomer/getall';
+export const routeCustomerSave = 'remoterouting/routecustomer/save';
+export const routeCustomerEdit = 'remoterouting/routecustomer/edit';
 
-export const routeCustomerMncmccGetAll = 'routecustomermncmcc/getall';
-export const routeCustomerMncmccSave = 'routecustomermncmcc/save';
-export const routeCustomerMncmccEdit = 'routecustomermncmcc/edit';
+export const routeCustomerMncmccGetAll = 'remoterouting/routecustomermncmcc/getall';
+export const routeCustomerMncmccSave = 'remoterouting/routecustomermncmcc/save';
+export const routeCustomerMncmccEdit = 'remoterouting/routecustomermncmcc/edit';
 
-export const routeSharedGetAll = 'routeshared/getall';
-export const routeSharedSave = 'routeshared/save';
-export const routeSharedEdit = 'routeshared/edit';
+export const routeSharedGetAll = 'remoterouting/routeshared/getall';
+export const routeSharedSave = 'remoterouting/routeshared/save';
+export const routeSharedEdit = 'remoterouting/routeshared/edit';
 
-export const routeSharedMncmccGetAll = 'routesharedmncmcc/getall';
-export const routeSharedMncmccSave = 'routesharedmncmcc/save';
-export const routeSharedMncmccEdit = 'routesharedmncmcc/edit';
+export const routeSharedMncmccGetAll = 'remoterouting/routesharedmncmcc/getall';
+export const routeSharedMncmccSave = 'remoterouting/routesharedmncmcc/save';
+export const routeSharedMncmccEdit = 'remoterouting/routesharedmncmcc/edit';

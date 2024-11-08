@@ -1,12 +1,12 @@
 // Carrier APIs
-export const carrierGetAll = 'carrier/getall/';
-export const carrierSave = 'carrier/save/';
-export const carrierEdit = 'carrier/edit/';
+export const carrierGetAll = 'remotevendor/carrier/getall/';
+export const carrierSave = 'remotevendor/carrier/save/';
+export const carrierEdit = 'remotevendor/carrier/edit/';
 
 // SMSC APIs
-export const smscGetAll = 'smsc/getall/';
-export const smscSave = 'smsc/save/';
-export const smscEdit = 'smsc/edit/';
+export const smscGetAll = 'remotevendor/smsc/getall/';
+export const smscSave = 'remotevendor/smsc/save/';
+export const smscEdit = 'remotevendor/smsc/edit/';
 
 
 
@@ -14,16 +14,16 @@ export const smscEdit = 'smsc/edit/';
 // apiRoutes.js
 
 // DataCenter APIs
-export const dataCenterGetAll = 'datacenter/getall/';
-export const dataCenterSave = 'datacenter/save/';
-export const dataCenterEdit = 'datacenter/edit/';
+export const dataCenterGetAll = 'remotevendor/datacenter/getall/';
+export const dataCenterSave = 'remotevendor/datacenter/save/';
+export const dataCenterEdit = 'remotevendor/datacenter/edit/';
 
 // KannelHost APIs
-export const kannelHostGetAll = 'kannelhost/getall/';
-export const kannelHostSave = 'kannelhost/save/';
-export const kannelHostEdit = 'kannelhost/edit/';
+export const kannelHostGetAll = 'remotevendor/kannelhost/getall/';
+export const kannelHostSave = 'remotevendor/kannelhost/save/';
+export const kannelHostEdit = 'remotevendor/kannelhost/edit/';
 
 // DCSmscid APIs
-export const dcSmscidGetAll = 'dc_smscid/getall/';
-export const dcSmscidSave = 'dc_smscid/save/';
-export const dcSmscidEdit = 'dc_smscid/edit/';
+export const dcSmscidGetAll = 'remotevendor/dc_smscid/getall/';
+export const dcSmscidSave = 'remotevendor/dc_smscid/save/';
+export const dcSmscidEdit = 'remotevendor/dc_smscid/edit/';

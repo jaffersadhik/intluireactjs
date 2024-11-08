@@ -28,13 +28,15 @@ function DcSmscidCreate() {
     const [ErrorMessage, setErrorMessage] = useState("");
     const [DataCenter, SetDataCenter] = useState();
     const [kannelhostname, Setkannelhostname] = useState();
+    const [filterdkannelhostname, Setfilterdkannelhostname] = useState();
+
     const [Smsc, SetSmsc] = useState();
 
 
 
     useEffect(() => {
         const fetchData = async () => {
-            
+
             try {
                 const response = await connectAPIViaGet(`${smscGetAll}?all=true`);
                 SetSmsc(response.data.data);
@@ -60,9 +62,7 @@ function DcSmscidCreate() {
     }, []);
 
     const [formData, setFormData] = useState({
-        // carrier_id: '',
         ip: '',
-        // mode: '',
         password: '',
         port: '',
         securelevel: '',
@@ -70,13 +70,8 @@ function DcSmscidCreate() {
         tps: '',
         username: '',
         dcname: '',
-        kannelhostname : ''
-        // carriername: '',
-        // dial_in_code: '',
-        // currencycode: '',
-        // routetype: '',
-        // smstype: '',
-        // timezone_id: '',
+        kannelhostname: ''
+
     });
 
     // Handle input changes and validations
@@ -86,6 +81,12 @@ function DcSmscidCreate() {
 
 
         // Set the field value
+        if (name === 'dcname') {
+            const filterdkannelhostoptions = kannelhostname.filter(item => item.dcname === (value));
+            console.log(filterdkannelhostoptions, "test")
+            Setfilterdkannelhostname(filterdkannelhostoptions)
+        }
+
         const fieldValue = type === 'checkbox' ? checked : value;
 
         // Only validate if the field is 'smscid'
@@ -139,7 +140,7 @@ function DcSmscidCreate() {
         };
 
         // Submit form data via API
-        connectAPIViaPost(updatedFormData,dcSmscidSave )
+        connectAPIViaPost(updatedFormData, dcSmscidSave)
             .then((response) => {
                 Setsuccess('Dc SMSCId created successfully');
                 Seterror('');
@@ -193,26 +194,25 @@ function DcSmscidCreate() {
 
 
                             <div className="-mx-3 md:flex md:mb-4">
-                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                                <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                     <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="carrier_id">
-                                    Kannel Host Name
-
+                                        Data Center
                                     </label>
 
                                     <div className="relative">
                                         <select
-                                            name="kannelhostname"
-                                            value={formData.kannelhostname}
+                                            name="dcname"
+                                            value={formData.dcname}
                                             onChange={handleChange}
                                             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
                                         >
                                             <option value="" disabled defaultValue>
-                                            Kannel Host Name
+                                                Data Center
                                             </option>
-                                            {kannelhostname &&
-                                                kannelhostname.map((kannelhostname) => (
-                                                    <option key={kannelhostname.kannelhostname} value={kannelhostname.kannelhostname}>
-                                                        {kannelhostname.kannelhostname}
+                                            {DataCenter &&
+                                                DataCenter.map((DataCenter) => (
+                                                    <option key={DataCenter.dcname} value={DataCenter.dcname}>
+                                                        {DataCenter.dcname}
                                                     </option>
                                                 ))}
                                         </select>
@@ -226,28 +226,44 @@ function DcSmscidCreate() {
                                 </div>
 
 
-                                <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                                <div className="md:w-1/2 px-3 mb-4 md:mb-0 relative group">
                                     <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="carrier_id">
-                                    Data Center 
+                                        Kannel Host Name
+
                                     </label>
 
                                     <div className="relative">
                                         <select
-                                            name="dcname"
-                                            value={formData.dcname}
+                                            name="kannelhostname"
+                                            value={formData.kannelhostname}
                                             onChange={handleChange}
                                             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
                                         >
                                             <option value="" disabled defaultValue>
-                                            Data Center 
+                                                Kannel Host Name
                                             </option>
-                                            {DataCenter &&
-                                                DataCenter.map((DataCenter) => (
-                                                    <option key={DataCenter.dcname} value={DataCenter.dcname}>
-                                                        {DataCenter.dcname}
+                                            {filterdkannelhostname && filterdkannelhostname.length > 0 &&
+                                                filterdkannelhostname.map((kannelhostname) => (
+                                                    <option key={kannelhostname.kannelhostname} value={kannelhostname.kannelhostname}>
+                                                        {kannelhostname.kannelhostname}
                                                     </option>
                                                 ))}
                                         </select>
+                                        {formData.dcname && filterdkannelhostname.length === 0 && (
+                                            <p className="text-red-500 text-xs italic mt-1">
+                                                No available kannelhostname options. Please choose an Another Data Center
+                                                first.
+                                            </p>
+                                        )}
+
+                                        {!formData.dcname && (
+                                            <p className="absolute left-3 top-full mt-1 text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                Choose a Data Center first.
+                                            </p>
+                                        )}
+
+
+
                                         {/* Down Arrow */}
                                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -338,20 +354,20 @@ function DcSmscidCreate() {
 
                             <div className="-mx-3 md:flex md:mb-4">
 
-                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                                <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                     <label className="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" htmlFor="carrier_id">
-                                    Smsc
+                                        Smsc
                                     </label>
 
                                     <div className="relative">
                                         <select
-                                                 name="smscid"
-                                                 value={formData.smscid}
-                                                 onChange={handleChange}
+                                            name="smscid"
+                                            value={formData.smscid}
+                                            onChange={handleChange}
                                             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2 px-2 mb-3 pr-8"
                                         >
                                             <option value="" disabled defaultValue>
-                                            SMSC ID
+                                                SMSC ID
                                             </option>
                                             {Smsc &&
                                                 Smsc.map((Smsc) => (
@@ -402,9 +418,9 @@ function DcSmscidCreate() {
                                 </div>
                             </div>
 
-   
 
-             
+
+
 
 
                             <div className="-mx-3 md:flex md:mb-4">

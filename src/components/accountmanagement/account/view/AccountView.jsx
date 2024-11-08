@@ -93,7 +93,8 @@ useEffect(() => {
 
                                         <p className="mb-2"><strong className='uppercase'>ipcheck :</strong> {account.ipcheck}</p>
 
-                                        
+                                        <p className="mb-2"><strong className='uppercase'>cluster :</strong> {account.cluster}</p>
+
                                         
                                         <p className="mb-2"><strong className='uppercase'>protocol :</strong> {account.protocol}</p>
 

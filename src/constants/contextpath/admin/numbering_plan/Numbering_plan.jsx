@@ -1,7 +1,7 @@
-export const mncmccList = 'mncmcc/getall';
-export const mncmccSave = 'mncmcc/save';
-export const mncmccEdit = 'mncmcc/edit';
+export const mncmccList = 'remotenumberingplan/mncmcc/getall';
+export const mncmccSave = 'remotenumberingplan/mncmcc/save';
+export const mncmccEdit = 'remotenumberingplan/mncmcc/edit';
 
-export const mncmccPrefixList = 'mncmccprefix/getall';
-export const mncmccPrefixSave = 'mncmccprefix/save';
-export const mncmccPrefixEdit = 'mncmccprefix/edit';
+export const mncmccPrefixList = 'remotenumberingplan/mncmccprefix/getall';
+export const mncmccPrefixSave = 'remotenumberingplan/mncmccprefix/save';
+export const mncmccPrefixEdit = 'remotenumberingplan/mncmccprefix/edit';

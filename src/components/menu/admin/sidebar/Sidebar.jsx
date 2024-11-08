@@ -10,17 +10,13 @@ import { MdCorporateFare } from "react-icons/md";
 import { MdOutlineRoute } from "react-icons/md";
 import { IoIosPerson, IoIosBriefcase, IoIosDocument, IoIosCar, IoIosSettings, IoIosGitBranch } from 'react-icons/io';
 import { AiOutlineDeliveredProcedure } from "react-icons/ai";
-import { GrUserManager } from "react-icons/gr";
-import { FaUsers } from "react-icons/fa6";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
-import { MdOnDeviceTraining } from "react-icons/md";
 import { BiMailSend } from "react-icons/bi";
 import { MdDevices } from "react-icons/md";
-import { MdManageAccounts } from "react-icons/md";
+import { IoIosLogOut } from "react-icons/io";
 import { BiSolidUserAccount } from "react-icons/bi";
 import { MdOutlineTextsms } from "react-icons/md";
-import { FaMoneyCheckAlt } from "react-icons/fa";
-
+import { userlogout } from "../../../../store/AuthSlice";
 function Sidebar({ pageName }) {
     const navigate = useNavigate();
     const [toggle, setToggle] = useState(false);
@@ -28,9 +24,8 @@ function Sidebar({ pageName }) {
     const sidebartype = useSelector((state) => state.Auth.sidebarType)
     const color = useSelector((state) => state.Auth.colourapi)
     const colorhover = useSelector((state) => state.Auth.hovercolourapi)
-    console.log(sidebarToggle, "test side")
+    const dispatch = useDispatch();
     const [showIcons, setShowIcons] = useState(sidebarToggle);
-    console.log(pageName, "coming submenu")
     useEffect(() => {
         if (pageName) {
             setActiveMenu(pageName);
@@ -41,41 +36,30 @@ function Sidebar({ pageName }) {
         }
 
     }, [pageName]);
-
-    const dispatch = useDispatch()
     const handleIconClick = () => {
-
         setShowIcons(!showIcons);
         dispatch(slidebar())
-        console.log(showIcons, "now")
         setActiveMenu(null);
-
-
     };
-
+    const handleLogout = (e) => {
+        e.preventDefault();
+        localStorage.clear();
+        dispatch(userlogout());
+        navigate("/");
+    };
     const [activeMenu, setActiveMenu] = useState(null);
-
     const handleItemClick = (menuItem) => {
-        // setActiveMenu(activeMenu === menuItem ? null : menuItem);
         setActiveMenu(menuItem);
-
-        // setShowIcons(!showIcons);
-        // dispatch(slidebar())
-
     };
     console.log(activeMenu)
     const handleBackClick = () => {
         setActiveMenu(null);
-        // setShowIcons(!showIcons);
         dispatch(slidebar())
     };
-
     const menuData = {
         "Master Enum": [
-
             { name: "ip check", link: "/customer/getall", icon: IoIosPerson },
             { name: "mnc mcc check", link: "/customer/topuplist", icon: FaMoneyBillTrendUp },
-
             { name: "invoicetype", link: "/masterenum/invoicetypelist", icon: MdCorporateFare },
             { name: " protocol", link: "/customer/customerdeliveryplan", icon: AiOutlineDeliveredProcedure },
             { name: "Route check", link: "/customer/rateprovisioninglist", icon: AiOutlineDeliveredProcedure },
@@ -84,15 +68,10 @@ function Sidebar({ pageName }) {
             { name: "smstype", link: "/customer/routeprovisioninglist", icon: AiOutlineDeliveredProcedure },
             { name: "status", link: "/customer/routeprovisioninglist", icon: AiOutlineDeliveredProcedure },
             { name: "price check", link: "/customer/routeprovisioninglist", icon: AiOutlineDeliveredProcedure },
-
-
-
-
         ],
         "NumberingPlan": [
             { name: "country ", link: "/vendor/vendorlist", icon: IoIosPerson },
             { name: " mnc mcc", link: "/vendor/vendorrateplan", icon: MdCorporateFare },
-
             { name: "mnc mcc prefix", link: "/vendor/vendordeliveryplan", icon: AiOutlineDeliveredProcedure },
             { name: "worldtimezone", link: "/vendor/vendordeliveryplan", icon: AiOutlineDeliveredProcedure },
         ],
@@ -100,48 +79,22 @@ function Sidebar({ pageName }) {
             { name: "currency ", link: "/smse/smsclist", icon: MdOutlineTextsms },
             { name: "currency conversion ", link: "/smse/deliveryprovisioninglist", icon: MdOutlineTextsms },
             { name: "currency conversion invoicedate ", link: "/smse/rateprovisioninglist", icon: MdOutlineTextsms },
-
-
-
-
-
         ],
-        "Account": [
-            { name: "Manager", link: "/manager/userlist", icon: FaUsers },
-
-        ],
-
         "Whitelist Management": [
             { name: "Sender id", link: "/whitelist/senderidlist", icon: BiMailSend },
             { name: "Ip", link: "/whitelist/iplist", icon: IoIosGitBranch },
             { name: "Device", link: "/whitelist/devicelist", icon: MdDevices },
-
-
-        ],
-
-        "Settings": [
-            { name: "SMTP Manager", link: "/vendors", icon: IoIosSettings },
-            { name: "Entity", link: "/vendor-orders", icon: IoIosDocument },
         ],
         "Account Management": [
             { name: "Account", link: "/account/accountsgetall", icon: BiSolidUserAccount },
             { name: "Customer", link: "/account/customersgetall", icon: BiSolidUserAccount },
-
             { name: "Company", link: "/account/companygetall", icon: BiSolidUserAccount },
             { name: "Sms Service Provide", link: "/account/smsserviceprovidegetall", icon: BiSolidUserAccount },
-
-
-
-            
-
         ],
         "SenderId Management": [
             { name: "senderid account", link: "/senderid/senderidaccountgetall", icon: IoIosBriefcase },
             { name: "senderid customer", link: "/senderid/senderidcustomerlist", icon: IoIosDocument },
             { name: "senderid shared", link: "/senderid/senderidsharedlist", icon: IoIosCar },
-
-
-
         ],
         "Vendor Management": [
             { name: "Carrier", link: "/Vendor/carriergetall", icon: IoIosBriefcase },
@@ -149,36 +102,21 @@ function Sidebar({ pageName }) {
             { name: "Data Center", link: "/Vendor/datacentergetall", icon: IoIosBriefcase },
             { name: "Kannel Host", link: "/Vendor/kannelhostgetall", icon: IoIosBriefcase },
             { name: "Dc Smscid", link: "/Vendor/dcsmscidgetall", icon: IoIosBriefcase },
-
-            
-            
-
         ],
         "Cost Management": [
             { name: "Cost Carrier", link: "/cost/costcarriergetall", icon: IoIosBriefcase },
-
             { name: "Cost Carrier Mnc Mcc", link: "/cost/costcarriermncmccgetall", icon: IoIosBriefcase },
             { name: "Cost Smsc", link: "/cost/costsmscgetall", icon: IoIosBriefcase },
             { name: "cost smsc mnc mcc", link: "/cost/costsmscmncmccgetall", icon: IoIosBriefcase },
-
-
-
         ],
         "Price Management": [
             { name: "Price Account", link: "/price/priceaccountgetall", icon: IoIosBriefcase },
             { name: "Price Account Mnc Mcc", link: "/price/priceaccountmncmccgetall", icon: IoIosBriefcase },
-
             { name: "Price Customer", link: "/price/pricecustomergetall", icon: IoIosBriefcase },
             { name: "Price Customer Mnc Mcc ", link: "/price/pricecustomermncmccgetall", icon: IoIosBriefcase },
-
             { name: "Price Shared", link: "/price/pricesharedgetall", icon: IoIosBriefcase },
             { name: "Price Shared Mnc Mcc", link: "/price/pricesharedmncmccgetall", icon: IoIosBriefcase },
-
-            
-            
-            
         ],
-
         "Error Code Management": [
             { name: "Error Code platform ", link: "/errorcode/errorcodeplatformgetall", icon: IoIosBriefcase },
             { name: "Error Code carrier ", link: "/errorcode/errorcodecarriergetall", icon: IoIosBriefcase },
@@ -186,93 +124,36 @@ function Sidebar({ pageName }) {
             { name: "Error Code Customer ", link: "/errorcode/errorcodecustomergetall", icon: IoIosBriefcase },
             { name: "Error Code Sms Service  ", link: "/errorcode/errorcodesmsserviceprovidergetall", icon: IoIosBriefcase },
         ],
-
         "Route Management": [
             { name: "Route ", link: "/route/routegetall", icon: IoIosBriefcase },
-
             { name: "Route Account ", link: "/route/routeaccountgetall", icon: IoIosBriefcase },
             { name: "Route Account Mnc Mcc ", link: "/route/routeaccountmncmccgetall", icon: IoIosBriefcase },
-
             { name: "Route Customer ", link: "/route/routecustomergetall", icon: IoIosBriefcase },
             { name: "Route Customer Mnc Mcc ", link: "/route/routecustomermncmccgetall", icon: IoIosBriefcase },
-
             { name: "Route Shared ", link: "/route/routesharedgetall", icon: IoIosBriefcase },
-
             { name: "Route Shared Mnc Mcc ", link: "/route/routesharedmncmccgetall", icon: IoIosBriefcase },
-
-            
         ],
-
         "Webhook Management": [
-
             { name: "Webhook Account ", link: "/webhook/webhookaccountgetall", icon: IoIosBriefcase },
             { name: "Webhook Customer ", link: "/webhook/webhookcustomergetall", icon: IoIosBriefcase },
-
             { name: "Webhook Parameter Index ", link: "/webhook/webhookparameterindexgetall", icon: IoIosBriefcase },
-
-            
         ],
-        
-
-
-
-
-        
-
         "Ip Management": [
             { name: "ip account", link: "/ip/ipaccountgetall", icon: IoIosBriefcase },
             { name: "ip customer", link: "/ip/ipcustomergetall", icon: IoIosDocument },
             { name: "ip shared", link: "/ip/ipsharedgetall", icon: IoIosCar },
-
-
-
         ],
-
-
         "Server Management": [
             { name: "Datacenter", link: "/server/datacenterList", icon: IoIosBriefcase },
             { name: "IP ", link: "/server/iplist", icon: IoIosDocument },
             { name: "PORT  ", link: "/server/portlist", icon: IoIosCar },
-            // { name: "TLVTAG ", link: "/gateway/tlgvlist", icon: IoIosSettings },
-            // { name: "Kannel", link: "/route/routeplanlist", icon: FaMoneyCheckAlt },
-
-
         ],
-        "Processor Management": [
 
-            { name: "TLVTAG ", link: "/processor/tlgvlist", icon: IoIosSettings },
-            { name: "Kannel", link: "/processor/kannellist", icon: FaMoneyCheckAlt },
-            { name: "Mysql Billing DB ", link: "/processor/mysqlbillingdblist", icon: IoIosSettings },
-            // { name: "Mysql concate DB ", link: "/processor/mysqlconcatedblist", icon: IoIosSettings },
-            { name: "MysqlQueueDB ", link: "/processor/mysqlqueuedblist", icon: FaMoneyCheckAlt },
-            { name: "RedisQueueDB ", link: "/processor/redisqueuedblist", icon: IoIosSettings },
-            // { name: "Queue DB to Redis ", link: "/processor/queuedbtoredislist", icon: IoIosSettings },
-            { name: "Request Receiver", link: "/processor/requestreceiverlist", icon: IoIosSettings },
-            { name: "Request Processor", link: "/processor/requestprocessorlist", icon: IoIosSettings },
-            // { name: "Smpp Interface ", link: "/processor/smppinterfacelist", icon: IoIosBriefcase },
-            // { name: "Smpp LoadBalancer ", link: "/processor/smpploadbalancerlist", icon: IoIosBriefcase },
-
-
-            { name: "Loadbalancer ", link: "/processor/httpLoadbalancerlist", icon: FaMoneyCheckAlt },
-            // { name: "Queuedbloadbalancer ", link: "/processor/queuedbloadbalancerlist", icon: FaMoneyCheckAlt },
-            // { name: "Concate Receiver ", link: "/processor/concatereceiverlist", icon: FaMoneyCheckAlt },
-            { name: "Billing Log ", link: "/processor/billingloglist", icon: FaMoneyCheckAlt },
-
-
-
-
-
-
-
-
-
-        ],
     };
 
     const handleMenuItemClick = (link) => {
         navigate(link);
     };
-    console.log(activeMenu, "active menu_____________")
 
     return (
         <>
@@ -285,11 +166,8 @@ function Sidebar({ pageName }) {
                     <FaBars onClick={handleIconClick} />
                 </div>
             )}
-            {/* <div className='hid'>
 
-            </div> */}
 
-            {/* <div className={` md:flex w-[22%] h-auto  justify-center   container bg-[#6592C7] bg-opacity-35  border-t-2 border-white  ${showIcons ? ' w-[22%]' : 'w-[5%]'}`} > */}
             <div className={`hidden md:flex w-[22%]  h-auto min-h-screen justify-center container  bg-opacity-35 border-t-2 border-white transform transition-all duration-300 bg-admin-color1  ${showIcons || activeMenu ? 'w-[22%]' : 'w-[5%]'}`} >
 
                 {activeMenu ? (
@@ -315,7 +193,6 @@ function Sidebar({ pageName }) {
 
 
                             <div className='flex justify-center items-center mt-4 mb-5 '>
-                                {/* <h1 className='text-white font-poppins text-[14px]'>Menu</h1> */}
                             </div>
                             <div className='flex justify-center  '>
 
@@ -330,14 +207,6 @@ function Sidebar({ pageName }) {
                                             </span>
                                         )}
                                     </div>
-
-
-
-
-
-
-
-
                                     <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("SenderId Management")} >
                                         <MdOutlineRoute />
                                         {showIcons && (
@@ -347,8 +216,6 @@ function Sidebar({ pageName }) {
                                             </span>
                                         )}
                                     </div>
-
-
                                     <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Vendor Management")} >
                                         <MdOutlineRoute />
                                         {showIcons && (
@@ -379,72 +246,66 @@ function Sidebar({ pageName }) {
                                         {showIcons && (
                                             <span className='flex items-center'>
                                                 <span>
-                                                     Cost Management
+                                                    Cost Management
                                                 </span>
                                                 <IoIosArrowForward />
                                             </span>
 
                                         )}
-                                        </div>
-                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Price Management")} >
+                                    </div>
+                                    <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Price Management")} >
                                         <MdOutlineRoute />
                                         {showIcons && (
                                             <span className='flex items-center'>
                                                 <span>
-                                                     Price Management
+                                                    Price Management
                                                 </span>
                                                 <IoIosArrowForward />
                                             </span>
 
                                         )}
-                                        </div>
-                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Error Code Management")} >
+                                    </div>
+                                    <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Error Code Management")} >
                                         <MdOutlineRoute />
                                         {showIcons && (
                                             <span className='flex items-center'>
                                                 <span>
-                                                Error Code Management
+                                                    Error Code Management
                                                 </span>
                                                 <IoIosArrowForward />
                                             </span>
 
                                         )}
-                                        </div>
+                                    </div>
 
-                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Route Management")} >
+                                    <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Route Management")} >
                                         <MdOutlineRoute />
                                         {showIcons && (
                                             <span className='flex items-center'>
                                                 <span>
-                                                Route Management
+                                                    Route Management
                                                 </span>
                                                 <IoIosArrowForward />
                                             </span>
 
                                         )}
-                                        </div>
-                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Webhook Management")} >
+                                    </div>
+                                    <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Webhook Management")} >
                                         <MdOutlineRoute />
                                         {showIcons && (
                                             <span className='flex items-center'>
                                                 <span>
-                                                Webhook Management
+                                                    Webhook Management
                                                 </span>
                                                 <IoIosArrowForward />
                                             </span>
 
                                         )}
-                                        </div>
-                                  
-                                       
-
-
+                                    </div>
                                 </div>
                             </div>
 
                         </nav>)}
-
-
             </div>
             <div className="md:hidden absolute top-0 right-0 z-10 ">
                 <button
@@ -507,168 +368,124 @@ function Sidebar({ pageName }) {
                             <nav>
 
 
-                                <div className='flex justify-center items-center mt-4 mb-5 '>
-                                    {/* <h1 className='text-white font-poppins text-[14px]'>Menu</h1> */}
+                                <div className='flex justify-center items-center mb-5 '>
                                 </div>
                                 <div className='flex justify-center  '>
 
                                     <div className='text-white text-[17px]'>
-                                        {/* <div className='flex items-center cursor-pointer p-2 gap-2 mb-4 bg-[#6592C7]  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => navigate('/dashboard/dashboard')} style={{ backgroundColor: colorhover }}> 
-                                        <MdDashboard />
 
-                                       
-                                            <span className='flex items-center '>
-                                                <span>DashBoard</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
-                                      
-
-
-                                       
-
-
-                                    </div> */}
-                                        <div className='flex items-center cursor-pointer p-2 gap-2 mb-4 bg-[#6592C7] rounded-md transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Customer Management")} style={{ backgroundColor: colorhover }}>
+                                        <div className='flex items-center cursor-pointer p-2 gap-2 mb-4 bg-admin-color2 rounded-md transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Account Management")} >
                                             <FaUsersGear />
-
-                                            <span className='flex items-center'>
-                                                <span>Customer Management</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
+                                            {showIcons && (
+                                                <span className='flex items-center'>
+                                                    <span>Account  Management</span>
+                                                    <IoIosArrowForward />
+                                                </span>
+                                            )}
                                         </div>
-
-                                        <div className='flex items-center cursor-pointer p-2 gap-2 mb-4 bg-[#6592C7] rounded-md transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Account Management")} style={{ backgroundColor: colorhover }}>
-                                            <MdManageAccounts />
-
-                                            <span className='flex items-center'>
-                                                <span>Account Management</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
+                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("SenderId Management")} >
+                                            <MdOutlineRoute />
+                                            {showIcons && (
+                                                <span className='flex items-center'>
+                                                    <span>SenderId Management</span>
+                                                    <IoIosArrowForward />
+                                                </span>
+                                            )}
                                         </div>
-
-
-                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 rounded-md bg-[#6592C7] transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Vendor Management")} style={{ backgroundColor: colorhover }}>
-                                            <FaUsersGear />
-
-
-                                            <span className='flex items-center'>
-                                                <span>Vendor Management</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
-
-
+                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Vendor Management")} >
+                                            <MdOutlineRoute />
+                                            {showIcons && (
+                                                <span className='flex items-center'>
+                                                    <span>Vendor Management</span>
+                                                    <IoIosArrowForward />
+                                                </span>
+                                            )}
                                         </div>
-                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-[#6592C7]  rounded-md transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Smsc Management")} style={{ backgroundColor: colorhover }}>
-                                            <MdOutlineTextsms />
-
-                                            <span className='flex items-center'>
-                                                <span>SMSC Management</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
-
-
-
-                                        </div>
-                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-[#6592C7]  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Route Management")} style={{ backgroundColor: colorhover }}>
+                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Ip Management")} >
                                             <MdOutlineRoute />
 
+                                            {showIcons && (
+                                                <span className='flex items-center'>
+                                                    <span>Ip Management</span>
+                                                    <IoIosArrowForward />
+                                                </span>
 
-                                            <span className='flex items-center'>
-                                                <span>Route Management</span>
-                                                <IoIosArrowForward />
-                                            </span>
+                                            )}
 
+
+                                        </div>
+                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Cost Management")} >
+                                            <MdOutlineRoute />
+                                            {showIcons && (
+                                                <span className='flex items-center'>
+                                                    <span>
+                                                        Cost Management
+                                                    </span>
+                                                    <IoIosArrowForward />
+                                                </span>
+
+                                            )}
+                                        </div>
+                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Price Management")} >
+                                            <MdOutlineRoute />
+                                            {showIcons && (
+                                                <span className='flex items-center'>
+                                                    <span>
+                                                        Price Management
+                                                    </span>
+                                                    <IoIosArrowForward />
+                                                </span>
+
+                                            )}
+                                        </div>
+                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Error Code Management")} >
+                                            <MdOutlineRoute />
+                                            {showIcons && (
+                                                <span className='flex items-center'>
+                                                    <span>
+                                                        Error Code Management
+                                                    </span>
+                                                    <IoIosArrowForward />
+                                                </span>
+
+                                            )}
+                                        </div>
+
+                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Route Management")} >
+                                            <MdOutlineRoute />
+                                            {showIcons && (
+                                                <span className='flex items-center'>
+                                                    <span>
+                                                        Route Management
+                                                    </span>
+                                                    <IoIosArrowForward />
+                                                </span>
+
+                                            )}
+                                        </div>
+                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-admin-color2  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Webhook Management")} >
+                                            <MdOutlineRoute />
+                                            {showIcons && (
+                                                <span className='flex items-center'>
+                                                    <span>
+                                                        Webhook Management
+                                                    </span>
+                                                    <IoIosArrowForward />
+                                                </span>
+
+                                            )}
+                                        </div>
+                                        <div className=' border-b-[1px] bg-[#F6F6F6] rounded-md border-gray-200 w-full mb-2 items-center justify-center  flex gap-4 p-2'>
+
+                                            <div className='flex justify-center font-semibold items-center cursor-pointer gap-2'>
+                                                <IoIosLogOut style={{ color: colorhover }} />
+
+                                                <span className="leading-tight m-0 text-xs text-[#0085FF] font-semibold" onClick={handleLogout}>Log out </span>
+                                            </div>
 
 
 
                                         </div>
-
-                                        <div className='flex items-center p-2 gap-2 mb-4 bg-[#6592C7]  rounded-md transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Manager Management")} style={{ backgroundColor: colorhover }}>
-                                            <GrUserManager />
-
-                                            <span className='flex items-center'>
-                                                <span>Manager Management</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
-
-
-
-
-
-
-
-
-                                        </div>
-
-
-                                        <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-[#6592C7]  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Whitelist Management")} style={{ backgroundColor: colorhover }}>
-                                            <MdOnDeviceTraining />
-
-
-                                            <span className='flex items-center'>
-                                                <span>Whitelist Management</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
-
-
-
-
-
-
-                                        </div>
-                                        {/* <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-[#6592C7]  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Server Management")}>
-                                        <MdOnDeviceTraining />
-                                        {showIcons && (
-                                            <span className='flex items-center'>
-                                                <span>Server Management</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
-                                        )}
-
-
-                                     
-
-                                    </div>
-                                    <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-[#6592C7]  rounded-md  transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Processor Management")}>
-                                        <MdOnDeviceTraining />
-                                        {showIcons && (
-                                            <span className='flex items-center'>
-                                                <span> Processor Management</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
-                                        )}
-
-
-
-                                       
-
-                                    </div>
-
-
-                                    <div className='flex items-center cursor-pointer  p-2 gap-2 mb-4 bg-[#6592C7]  rounded-md transform transition-transform duration-200 hover:scale-110' onClick={() => handleItemClick("Settings")}>
-                                        <IoSettingsOutline />
-                                        {showIcons && (
-                                            <span className='flex items-center'>
-                                                <span> Settings</span>
-                                                <IoIosArrowForward />
-                                            </span>
-
-                                        )}
-
-
-                                       
-
-                                    </div> */}
-
 
 
 

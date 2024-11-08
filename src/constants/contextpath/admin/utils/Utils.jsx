@@ -1,9 +1,9 @@
 
-export const countryGetAll = 'country/getall';
-export const worldtimezoneGetAll = 'worldtimezone/getall';
-export const currencyGetAll = 'currency/getall';
+export const countryGetAll = 'remotenumberingplan/country/getall';
+export const worldtimezoneGetAll = 'remotenumberingplan/worldtimezone/getall';
+export const currencyGetAll = 'remotecurrency/currency/getall';
 
 
-export const smsServiceProvidermainGetAll = 'smsserviceprovidermain/getall';
+export const smsServiceProvidermainGetAll = 'remotemasterenum/smsserviceprovidermain/getall';
 
-export const smsServiceProvidermainCreate = 'smsserviceprovidermain/save';
+export const smsServiceProvidermainCreate = 'remotemasterenum/smsserviceprovidermain/save';

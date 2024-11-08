@@ -12,9 +12,8 @@ import { setCredentials ,slidebartype,colourapi,hovercolourapi} from "../../stor
 import axios from 'axios';
 import Footer from '../footer/Footer';
 import { connectAPIViaGet } from '../../services/Get';
-
 // import { apitheme } from '../../constants/contextpath/user/utils/Utils';
-
+import { SigninApi } from '../../constants/contextpath/admin/authentication/Authentication';
 function Signin() {
     
     const authstate = useSelector((state) => state.Auth);
@@ -126,7 +125,7 @@ function Signin() {
     };
   
     try {
-      const apiUrl = process.env.REACT_APP_API_URL 
+      const apiUrl = process.env.REACT_APP_API_URL + SigninApi
     
       const response = await axios.post(apiUrl, user, {
         headers: {
@@ -137,12 +136,15 @@ function Signin() {
       if (response.status === 200) {
         setError("");
         localStorage.clear();
-        localStorage.setItem('access_token', response.data.token);
+        localStorage.setItem('access_token', response.data.access);
         
         const userdata = {
-          accessToken: response.data.token,
+          accessToken: response.data.access,
+          username : response.data.username,
+          refreshToken:response.data.refresh
+
         };
-        
+        console.log(userdata,"test me now")
   
         if (userdata && userdata.accessToken) {
           console.log(userdata, "userdata__________");
@@ -155,7 +157,7 @@ function Signin() {
         localStorage.setItem('username', response.data.username);
   
         console.log(response.status, "test data")
-        navigate('/masterenum/invoicetypelist');
+        navigate('/account/accountsgetall');
       }
       console.log(response);
     } catch (error) {
@@ -165,19 +167,12 @@ function Signin() {
         } else {
           setError('An error occurred during login. Please try again later');
         }
-        const userdata = {
-          accessToken: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2Vyb25lIiwicm9sZSI6IlJPTEVfUkVTRUxMRVIiLCJleHAiOjE3MjQzOTg1NDAsInVzZXJJZCI6IjUwYzFmMzE3LTgyZjEtNDMxZC1iZjE1LWY5MmUwY2YxODI5MCIsImlhdCI6MTcyNDMxMjE0MCwiaXNSZXNlbGxlciI6dHJ1ZX0._e1WqoLSWhLoxDHJmgrPX7F-gh7CR7XW_MXoRlTDyPMNFrIn2QF3Yd_R0FoUp41H_Xgc_0sgFNgx4t3xfLzGMg",
-        };
-        dispatch(setCredentials(userdata));
-        navigate('/masterenum/invoicetypelist');
+       
+     
 
       } else {
         setError('An error occurred. Please check your network connection.');
-        const userdata = {
-          accessToken: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2Vyb25lIiwicm9sZSI6IlJPTEVfUkVTRUxMRVIiLCJleHAiOjE3MjQzOTg1NDAsInVzZXJJZCI6IjUwYzFmMzE3LTgyZjEtNDMxZC1iZjE1LWY5MmUwY2YxODI5MCIsImlhdCI6MTcyNDMxMjE0MCwiaXNSZXNlbGxlciI6dHJ1ZX0._e1WqoLSWhLoxDHJmgrPX7F-gh7CR7XW_MXoRlTDyPMNFrIn2QF3Yd_R0FoUp41H_Xgc_0sgFNgx4t3xfLzGMg",
-        };
-        dispatch(setCredentials(userdata));
-        navigate('/masterenum/invoicetypelist');
+       
       }
     }
   };
